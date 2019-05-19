@@ -1,8 +1,7 @@
 /* ================================================
             Imports
 ==================================================*/
-@import url("https://fonts.googleapis.com/css?family=Droid+Serif:400,400i");
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i");
+
 @import "../../../../../../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import url(vendor/resources/normalize.css);
 @import url(vendor/resources/component.css);

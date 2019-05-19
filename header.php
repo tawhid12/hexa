@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 
@@ -11,11 +11,11 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <!-- Title -->
-    <title>Home-1 | Hexa Personal Blog</title>
+
     <!-- favicon Icon -->
     <link rel="icon" href="assets/img/favicon.png" type="image/x-icon"/>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/stylesheets/main.css">
+
     <?php wp_head(); ?>
 </head>
 
@@ -60,91 +60,13 @@
             </nav>
         </div>
         <!-- //.site-branding -->
-        <nav class="navbar main-nav navbar-expand-lg">
-            <div class="container">
-                <button class="navbar-toggler m-menu-btn" type="button" data-toggle="collapse" data-target="#mainNav">
-                    <span></span>
-                </button>
-                <div class="collapse navbar-collapse" id="">
-                    <!--navbar nav-->
-                    <?php 
-                    $hexa_menu = wp_nav_menu(array(
-                        'theme_location' => 'topmenu',
-                        'menu_id' => 'mainNav',
-                        'menu_class' => 'navbar-nav'
-                    ));
-                    echo $hexa_menu;
-                    ?>
-                </div>
-                <!--search form-->
-                <form class="form-inline ml-auto" action="#" method="get">
-                    <input class="form-control border-0 " type="search" placeholder="write something">
-                </form>
-            </div>
-        </nav>
+        <?php  get_template_part("template-parts/common/nav");?>
     </header>
     <!-- =========================== //Main Header =========================== -->
     <!-- =========================== Banner Post =========================== -->
-    <div class="banner-post">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <!-- big post-->
-                    <div class="big-post">
-                        <img src="assets/img/banner/1.jpg" alt="Blog Post">
-                        <!-- post text -->
-                        <div class="big-post-text">
-                            <div class="inner-wrap">
-                                <mark class="catagory">Nature</mark>
-                                <h1>A Green Agulina on a Tree in a Big Forest</h1>
-                                <a href="#" class="read-more double-line">read more</a>
-                            </div>
-                        </div>
-                        <!-- posted date -->
-                        <span class="posted-date">26 Jan, 2016</span>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 mt-md-0 mt-sm-4 mt-4">
-                    <div class="h-100 row banner-sidebar">
-                        <!-- sub post -->
-                        <div class="col-md-12 col-sm-6 col-6 align-self-md-start">
-                            <div class="sub-post">
-                                <div class="post-content hvr-rectangle-out">
-                                    <a href="#"><img src="assets/img/banner/2.jpg" alt="Blog Post"></a>
-                                    <!-- post text -->
-                                    <div class="sub-post-text ">
-                                        <div class="inner-wrap">
-                                            <mark class="catagory">Life Style</mark>
-                                            <h2>Young Woman Walking Alone in The Park in Snowy Weather</h2>
-                                            <a href="#" class="read-more double-line">read more</a>
-                                        </div>
-                                    </div>
-                                    <!-- posted date -->
-                                    <span class="posted-date">26 Jan, 2016</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- sub post -->
-                        <div class="col-md-12 col-sm-6 col-6 align-self-md-end">
-                            <div class="sub-post">
-                                <div class="post-content hvr-rectangle-out">
-                                    <a href="#"><img src="assets/img/banner/3.jpg" alt="Blog Post"></a>
-                                    <!-- post text -->
-                                    <div class="sub-post-text ">
-                                        <div class="inner-wrap">
-                                            <mark class="catagory">Life Style</mark>
-                                            <h2>Young Woman Walking Alone in The Park in Snowy Weather</h2>
-                                            <a href="#" class="read-more double-line">read more</a>
-                                        </div>
-                                    </div>
-                                    <!-- posted date -->
-                                    <span class="posted-date">26 Jan, 2016</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+        if(is_home()){
+            get_template_part("template-parts/blog-home/featured");
+        }
+    ?>
     <!-- =========================== //Banner Post =========================== -->
