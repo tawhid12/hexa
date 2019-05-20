@@ -1,196 +1,50 @@
-<?php 
-    the_post();
-    get_header();
-?>
-<!-- =========================== Middle Content =========================== -->
-<div class="middle-content pt-50">
+<?php get_header(); ?>
+    <!-- =========================== Catagory Area =========================== -->
+    <div class="catagory-area">
+        <div class="container">
+            <h1><?php single_cat_title(); ?></h1>
+            <p><?php echo category_description()?></p>
+        </div>
+    </div>
+    <!-- =========================== //Catagory Area =========================== -->
+    <!-- =========================== Middle Content =========================== -->
+    <div class="middle-content">
         <div class="container">
             <div class="row">
                 <!-- ====================== Main .blog-area ====================== -->
-                <main class="col-xl-8 col-lg-8 col-md-7 blog-details-area">
-                    <!-- ================= Full Post ================= -->
-                    <article class="card full-post border-0">
-                        <mark class="catagory text-center"><?php the_category(); ?></mark>
-                        <h2 class="card-title text-center h1"><?php the_title(); ?></h2>
-                        <!-- Blog Content-->
-                        <div class="blgo-content">
-                            <?php the_post_thumbnail();?>
-                            <span class="posted-date"><?php the_date();?></span>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body blog-texts p-0">
-                            <span class="posted-by mt-20 mb-20 d-block">Posted By <mark class="admin"><?php the_author();?></mark></span>
-                            <p class="card-text"><?php the_content();?></p>
-                            
-                        </div>
-                        <!--  Quotes  -->
-                        <!--<div class="quotes">
-                            <p class="text-center mb-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi <i class="fa fa-quote-right"></i></p>
-                        </div>-->
-                        <!--<p>ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur</p>-->
-                        <!-- Card List -->
-                        <div class="card card-list border-0">
-                            <h2 class="card-title">The standard Lorem Ipsum passage, used since the 1500s</h2>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item border-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</li>
-                                <li class="list-group-item border-0">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,</li>
-                                <li class="list-group-item border-0">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled</li>
-                            </ul>
-                            <p class="card-text">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi</p>
-                            <!-- Card Footer -->
-                            <div class="align-items-center bg-white border-0 card-footer d-flex flex-column flex-lg-row justify-content-md-between p-0">
-                                <div class="share-icons w-50">
-                                    <span>Share:</span>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                                <div class="tags">
-                                    <?php the_tags(" "," "," ");?>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- ================= /Full Post ================= -->
+                <main class="col-xl-8 col-lg-8 col-md-7 blog-area">
+                    <!-- ========== Highlight Blog ========== -->
+                    <!-- Single Blog -->
+
+                    <!-- //Single Blog -->
+                    <!-- =============== Recent Blog =============== -->
+                    <div class="recent-blogs blog-grid row">
+                        <?php if(!have_posts()):?>
+                            <?php _e("There is no post in this category","hexa");?>
+                        <?php endif; ?>
+                        <?php 
+                            while(have_posts()){
+                                the_post();
+                                get_template_part("template-parts/post-formats/post",get_post_format());
+                            }
+                        ?>                  
+                   </div>
                     <!-- =============== //Recent Blog =============== -->
-                    <!-- =============== Blog Pagination =============== -->
-                    <nav class="blog-pagination">
+                    <!-- Blog Pagination -->
+                    <nav class="blog-pagination pt-20 pb-20">
                         <ul class="justify-content-between pagination">
-                            <li class="page-item newer-post pl-15">
-                                <?php 
-                                    $hexa_pre = get_previous_post();
-                                    if($hexa_pre):
-                                    ?>
-                                <a class="page-link border-0 hvr-icon-back" href="<?php get_the_permalink($hexa_pre)?>">
-                                <?php _e("Previews Post","hexa"); ?>
-                                <?php echo get_the_title($hexa_pre);?>
-                                </a>
-                                <?php
-                                endif;
-                                ?>
-                            </li>
-                            <li class="page-item older-post pr-15">
-                            <?php 
-                                $hexa_next = get_next_post();
-                                if($hexa_next):
-                            ?>
-                            <a class="page-link border-0 hvr-icon-forward" href="<?php get_the_permalink($hexa_next)?>">
-                                <?php _e("Next Post","hexa"); ?>
-                                <?php echo get_the_title($hexa_next);?>
-                                </a>
-                                <?php
-                                endif;
-                                ?>
-                            </a>
-                        </li>
+                            <li class="page-item newer-post disabled pl-15"><a class="page-link border-0 hvr-icon-back" href="#">Newer Post</a></li>
+                            <li class="page-item older-post pr-15"><a class="page-link border-0 hvr-icon-forward" href="#">Older Post</a></li>
                         </ul>
                     </nav>
                     <!-- //Pagination -->
-                    <!-- Author Box -->
-                    <div class="author-box row">
-                        <div class="col-xl-2  col-lg-3 text-center">
-                            <?php echo get_avatar(get_the_author_meta("ID"));?>
-                            <div class="icon-list">
-                                <?php
-                                    $hexa_fb =  get_field("facebook","user_".get_the_author_meta("ID"));
-                                    $hexa_tw =  get_field("twitter","user_".get_the_author_meta("ID"));
-                                    $hexa_g_plus =  get_field("google_plus","user_".get_the_author_meta("ID"));
-                                    $hexa_pin =  get_field("pin","user_".get_the_author_meta("ID"));
-                                ?>
-                                <?php
-                                if($hexa_fb):
-                                ?>
-                                <a href="<?php echo esc_url($hexa_fb); ?>"><i class="fa fa-facebook"></i></a>
-                                <?php endif; ?>
-                                <?php 
-                                
-                                if($hexa_tw):
-                                ?>
-                                <a href="<?php echo esc_url($hexa_tw); ?>"><i class="fa fa-twitter"></i></a>
-                                <?php endif; ?>
-                                <?php 
-                                if($hexa_g_plus):
-                                ?>
-                                <a href="<?php echo esc_url($hexa_g_plus); ?>"><i class="fa fa-google-plus"></i></a>
-                                <?php endif; ?>
-                                <?php 
-                                if($hexa_pin):
-                                ?>
-                                <a href="<?php echo esc_url($hexa_pin); ?>"><i class="fa fa-pinterest"></i></a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-9">
-                            <div class="card author-info border-0">
-                                <h2 class="card-title"><?php the_author();?></h2>
-                                <div class="card-body p-0">
-                                    <p class="card-text"><?php the_author_meta("description");?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- //Author Box -->
-                    <!-- ================= Comment Area ================= -->
-                    <?php 
-                        if(!post_password_required()){
-                            comments_template();
-                        }
-                    ?>
-                    <!-- ================= //Comment Area ================= -->
-                    <!-- ================= Releted post ================= -->
-                    <div class="releted-post">
-                        <h2 class="widget-title">RELATED POST</h2>
-                        <div class="row align-items-end">
-                            <!-- Single Blog -->
-                            <article class="card single-blog text-center border-0 mb-4 mb-lg-0 col-lg-4 col-sm-6">
-                                <a href="#">
-                                    <mark class="catagory">Life Style</mark>
-                                    <h3 class="card-title">Rusted Wagon with Grafitti Art Alone in The</h3>
-                                    <!-- Blog Content-->
-                                    <div class="blgo-content">
-                                        <img class="card-img rounded-0" src="assets/img/blog-details/3.jpg" alt="Blog Image">
-                                        <span class="posted-date">26 Jan, 2016</span>
-                                    </div>
-                                </a>
-                            </article>
-                            <!-- //Single Blog -->
-                            <!-- Single Blog -->
-                            <article class="card single-blog text-center border-0 mb-4 mb-lg-0 col-lg-4 col-sm-6">
-                                <a href="#">
-                                    <mark class="catagory">Life Style</mark>
-                                    <h3 class="card-title">Young Woman Walking Alone in The Park in Weather</h3>
-                                    <!-- Blog Content-->
-                                    <div class="blgo-content">
-                                        <img class="card-img rounded-0" src="assets/img/blog-details/4.jpg" alt="Blog Image">
-                                        <span class="posted-date">26 Jan, 2016</span>
-                                    </div>
-                                </a>
-                            </article>
-                            <!-- //Single Blog -->
-                            <!-- Single Blog -->
-                            <article class="card single-blog text-center border-0 mb-4 mb-lg-0 col-lg-4 col-sm-6">
-                                <a href="#">
-                                    <mark class="catagory">Life Style</mark>
-                                    <h3 class="card-title">Iguluna Showing her face in a Forest</h3>
-                                    <!-- Blog Content-->
-                                    <div class="blgo-content">
-                                        <img class="card-img rounded-0" src="assets/img/blog-details/5.jpg" alt="Blog Image">
-                                        <span class="posted-date">26 Jan, 2016</span>
-                                    </div>
-                                </a>
-                            </article>
-                            <!-- //Single Blog -->
-                        </div>
-                    </div>
-                    <!-- ================= //Releted post ================= -->
                 </main>
                 <!-- ====================== //Main .blog-area ====================== -->
                 <!-- ====================== Aside .middle-sidebar ====================== -->
                 <aside class="col-xl-3 col-lg-4 col-md-5 middle-sidebar ml-xl-auto pl-lg-0 pl-md-0 mt-sm-5 mt-lg-0">
                     <div class="row">
                         <!-- Sidebar Widget, About Me-->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-about-me sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-about-me sidebar-widget pl-lg-0">
                             <h2 class="widget-title">ABOUT ME</h2>
                             <div class="card about-me text-center border-0 rounded-0 p-15">
                                 <img class="card-img-top rounded-0" src="assets/img/sidebar/1.jpg" alt="image cap">
@@ -207,7 +61,7 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget, All Catagory-->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-catagory sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-catagory sidebar-widget pl-lg-0">
                             <h2 class="widget-title">CATAGORY</h2>
                             <div class="card all-catagory border-0 rounded-0 pt-30 pb-30">
                                 <div class="card-header font-weight-bold d-flex justify-content-between align-item-center border-0 py-2 px-3">
@@ -222,7 +76,7 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget, Latest Post-->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-latest-post sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-latest-post sidebar-widget pl-lg-0">
                             <h2 class="widget-title">LATEST POST</h2>
                             <div class="latest-post owl-carousel p-15">
                                 <!-- Sub Post Slide-Item -->
@@ -308,7 +162,7 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget, Sidebar News Letter -->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-news-letter sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-news-letter sidebar-widget pl-lg-0">
                             <h2 class="widget-title">NEWS LETTER</h2>
                             <!-- New Letter-->
                             <div class="card news-letter border-0 rounded-0 p-15">
@@ -322,7 +176,7 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget, Sidebar Popular Post -->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-popular-post sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-popular-post sidebar-widget pl-lg-0">
                             <h2 class="widget-title">POPULAR POST</h2>
                             <!-- Popular Post -->
                             <div class="popular-post p-15">
@@ -371,7 +225,7 @@
                             </div>
                         </div>
                         <!-- Sidebar Widget, Sidebar Advertise -->
-                        <div class="col-xl-12 col-md-11 col-sm-6 ml-lg-auto ml-md-auto sidebar-advertise sidebar-widget pl-xl-0">
+                        <div class="col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-advertise sidebar-widget pl-lg-0">
                             <h2 class="widget-title">ADVERTISE</h2>
                             <!-- ADVERTISE-->
                             <div class="card advertise border-0 rounded-0 p-15">
