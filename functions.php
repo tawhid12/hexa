@@ -20,3 +20,15 @@ function hexa_asset(){
     wp_enqueue_script("hexa-main",get_theme_file_uri("/assets/js/main.js"),array("jquery"),"2.0");
 }
 add_action("wp_enqueue_scripts","hexa_asset");
+function hexa_widgets(){
+    register_sidebar(array(
+        'name' => __('side bar','hexa'),
+        'id'   => 'side',
+        'description' => __('this is only for side bar <3','hexa'),
+        'before_widget' => '<div class"=col-xl-12 col-md-11 col-sm-6 ml-md-auto sidebar-about-me sidebar-widget pl-lg-0">',
+        'after_widget' => '<div>',
+        'before_title' =>'<h2 class="widget-title">',
+        'after_title' => '</h2>'
+    ));
+}
+add_action('widgets_init','hexa_widgets');
